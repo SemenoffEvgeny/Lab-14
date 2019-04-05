@@ -1,9 +1,25 @@
 public class Decoder {
+    private String a = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
 
-    public static String decoder(String coder_text) {
+    public String decode(String coder_text) {
         String[] text = coder_text.split("\n");
-        Decoder_metods de_coder = new Decoder_metods();
-        return de_coder.string_1_2(-4, text[0]) + "\n"
-                + de_coder.string_1_2(8, text[1]) + "\n";
+
+        return this.string_1_2(-4, text[0]) + "\n"
+                + this.string_1_2(8, text[1]) + "\n";
+    }
+
+    public String string_1_2(int s, String str){
+        String[] symbols = str.split("");
+        StringBuilder de_str = new StringBuilder();
+        for (String symbol : symbols) {
+            if (this.a.contains(symbol)) {
+                int p = s + this.a.indexOf(symbol);
+                if (p > 32) p = p - 33;
+                if (p < 0) p = p + 33;
+                de_str.append(this.a.charAt(p));
+            }
+            else de_str.append(symbol);
+        }
+        return de_str.toString();
     }
 }
